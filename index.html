@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Relatório Mensal de Comércio de Produtos Veterinários de Interesse da Defesa Agropecuária – ADAPAR</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Relatório Mensal de Comércio de Produtos Veterinários de Interesse da Defesa Agropecuária – ADAPAR</h1>
+      <p class="muted">Preencha todas as seções. Os dados serão enviados automaticamente ao sistema da ADAPAR.</p>
+    </header>
+
+    <form id="relatorioForm">
+      <!-- Seção Identificação -->
+      <section class="card">
+        <h2>Identificação</h2>
+        <div class="grid-2">
+          <label>Nome do Estabelecimento<input name="nome_estabelecimento" required /></label>
+          <label>CNPJ<input name="cnpj" placeholder="00.000.000/0000-00" required /></label>
+        </div>
+        <div class="grid-2">
+          <label>Telefone<input name="telefone" /></label>
+          <label>Mês/Ano<input name="mes_ano" placeholder="MM/YYYY" required /></label>
+        </div>
+        <label>Endereço<input name="endereco" /></label>
+        <div class="grid-3">
+          <label>Município<input name="municipio" required /></label>
+          <label>UF<input name="uf" maxlength="2" required /></label>
+          <label>Registro na ADAPAR<input name="registro_adapar" /></label>
+        </div>
+        <div class="grid-2">
+          <label>Nome do Veterinário Responsável<input name="vet_responsavel" /></label>
+          <label>Proprietário do Estabelecimento<input name="proprietario" /></label>
+        </div>
+        <label>E-mail do estabelecimento (para cópia automática)<input name="email_estabelecimento" type="email" required /></label>
+      </section>
+
+      <!-- Controle de Temperatura -->
+      <section class="card">
+        <h2>Demonstrativo de Temperatura</h2>
+        <p class="muted">Insira leituras diárias. Deixe vazias as linhas não aplicáveis.</p>
+        <div id="tempTables">
+          <!-- Cria dinamicamente 1 tabela de 31 dias (padrão) -->
+        </div>
+        <button type="button" id="addRefrigerator" class="btn-small">Adicionar outro refrigerador</button>
+      </section>
+
+      <!-- AAT -->
+      <section class="card">
+        <h2>Antígeno Acidificado Tamponado (AAT)</h2>
+        <div class="grid-2">
+          <label>Saldo anterior<input name="aat_saldo_anterior" /></label>
+          <label>Recebidos no mês - Nota Fiscal<input name="aat_recebidos_nf" /></label>
+        </div>
+        <label>Resumo (frascos/doses)<textarea name="aat_resumo"></textarea></label>
+      </section>
+
+      <!-- Tb Bovina -->
+      <section class="card">
+        <h2>Tuberculina Bovina</h2>
+        <div class="grid-2">
+          <label>Saldo anterior<input name="tb_bov_saldo_anterior" /></label>
+          <label>Recebidos - NF<input name="tb_bov_recebidos_nf" /></label>
+        </div>
+        <label>Resumo<textarea name="tb_bov_resumo"></textarea></label>
+      </section>
+
+      <!-- Tb Aviária -->
+      <section class="card">
+        <h2>Tuberculina Aviária</h2>
+        <div class="grid-2">
+          <label>Saldo anterior<input name="tb_av_saldo_anterior" /></label>
+          <label>Recebidos - NF<input name="tb_av_recebidos_nf" /></label>
+        </div>
+        <label>Resumo<textarea name="tb_av_resumo"></textarea></label>
+      </section>
+
+      <!-- B19 -->
+      <section class="card">
+        <h2>Vacina Brucelose B19</h2>
+        <label>Registro de compras/vendas/estoque<textarea name="b19_detalhes"></textarea></label>
+      </section>
+
+      <!-- RB51 -->
+      <section class="card">
+        <h2>Vacina Brucelose RB51</h2>
+        <label>Registro de compras/vendas/estoque<textarea name="rb51_detalhes"></textarea></label>
+      </section>
+
+      <!-- Antirrábica -->
+      <section class="card">
+        <h2>Vacina Antirrábica</h2>
+        <label>Detalhes de vendas/estoque<textarea name="antirrabica_detalhes"></textarea></label>
+      </section>
+
+      <!-- Pasta Vampiricida -->
+      <section class="card">
+        <h2>Pasta Vampiricida</h2>
+        <label>Detalhes de vendas/estoque<textarea name="pasta_detalhes"></textarea></label>
+      </section>
+
+      <section class="card actions">
+        <button class="btn" type="submit">Enviar Relatório</button>
+        <div id="formStatus" aria-live="polite"></div>
+      </section>
+    </form>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
