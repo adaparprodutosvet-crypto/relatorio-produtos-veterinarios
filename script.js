@@ -1,5 +1,5 @@
 // script-expanded.js
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwPYx3EXpFQTNm3Ms9mFwk2sVRP5Zb_MokK9WeytCkT1p14xYctDPheJLpnB4tkSXfeyQ/exec';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwUwRVbO2QyjrupUswYGSBU3W6AdjzbKqhMiaZJi_8pHmL1sFsYMEsUVnGOLg1RLU8Jfg/exec';
 
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('relatorioForm');
