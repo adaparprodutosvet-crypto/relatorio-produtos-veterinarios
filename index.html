@@ -10,96 +10,142 @@
   <main class="container">
     <header>
       <h1>Relatório Mensal de Comércio de Produtos Veterinários de Interesse da Defesa Agropecuária – ADAPAR</h1>
-      <p class="muted">Preencha todas as seções. Os dados serão enviados automaticamente ao sistema da ADAPAR.</p>
+      <p class="muted">Preencha todas as seções conforme o modelo oficial. Campos obrigatórios têm *</p>
     </header>
 
     <form id="relatorioForm">
-      <!-- Seção Identificação -->
+      <!-- IDENTIFICAÇÃO -->
       <section class="card">
-        <h2>Identificação</h2>
+        <h2>IDENTIFICAÇÃO</h2>
         <div class="grid-2">
-          <label>Nome do Estabelecimento<input name="nome_estabelecimento" required /></label>
-          <label>CNPJ<input name="cnpj" placeholder="00.000.000/0000-00" required /></label>
+          <label>Nome do Estabelecimento *<input name="nome_estabelecimento" required /></label>
+          <label>CNPJ *<input name="cnpj" placeholder="00.000.000/0000-00" required /></label>
         </div>
-        <div class="grid-2">
+        <div class="grid-3">
           <label>Telefone<input name="telefone" /></label>
-          <label>Mês/Ano<input name="mes_ano" placeholder="MM/YYYY" required /></label>
+          <label>Mês/Ano *<input name="mes_ano" placeholder="MM/YYYY" required /></label>
+          <label>Registro na ADAPAR<input name="registro_adapar" /></label>
         </div>
         <label>Endereço<input name="endereco" /></label>
-        <div class="grid-3">
-          <label>Município<input name="municipio" required /></label>
-          <label>UF<input name="uf" maxlength="2" required /></label>
-          <label>Registro na ADAPAR<input name="registro_adapar" /></label>
+        <div class="grid-2">
+          <label>Município *<input name="municipio" required /></label>
+          <label>UF *<input name="uf" maxlength="2" required /></label>
         </div>
         <div class="grid-2">
           <label>Nome do Veterinário Responsável<input name="vet_responsavel" /></label>
           <label>Proprietário do Estabelecimento<input name="proprietario" /></label>
         </div>
-        <label>E-mail do estabelecimento (para cópia automática)<input name="email_estabelecimento" type="email" required /></label>
+        <label>E-mail do estabelecimento (para cópia automática) *<input name="email_estabelecimento" type="email" required /></label>
       </section>
 
-      <!-- Controle de Temperatura -->
+      <!-- CONTROLE DE TEMPERATURA: suportará múltiplos refrigeradores -->
       <section class="card">
-        <h2>Demonstrativo de Temperatura</h2>
-        <p class="muted">Insira leituras diárias. Deixe vazias as linhas não aplicáveis.</p>
-        <div id="tempTables">
-          <!-- Cria dinamicamente 1 tabela de 31 dias (padrão) -->
+        <h2>DEMONSTRATIVO DE TEMPERATURA</h2>
+        <p class="muted">Adicione um formulário por refrigerador. Preencha Máx/Mín/Atual para cada dia.</p>
+        <div id="tempContainer"></div>
+        <div style="margin-top:8px">
+          <button type="button" id="addTemp" class="btn-small">Adicionar refrigerador</button>
+          <button type="button" id="removeTemp" class="btn-small">Remover último refrigerador</button>
         </div>
-        <button type="button" id="addRefrigerator" class="btn-small">Adicionar outro refrigerador</button>
       </section>
 
-      <!-- AAT -->
+      <!-- SEÇÃO: AAT (tabela dinâmica de requisições/entradas/saídas) -->
       <section class="card">
-        <h2>Antígeno Acidificado Tamponado (AAT)</h2>
+        <h2>RELATÓRIO DE ANTÍGENO ACIDIFICADO TAMPONADO – AAT</h2>
         <div class="grid-2">
-          <label>Saldo anterior<input name="aat_saldo_anterior" /></label>
-          <label>Recebidos no mês - Nota Fiscal<input name="aat_recebidos_nf" /></label>
+          <label>Saldo anterior (frascos/doses)<input name="aat_saldo_anterior" /></label>
+          <label>Recebidos NF (informar notas)<input name="aat_recebidos_nf" /></label>
         </div>
-        <label>Resumo (frascos/doses)<textarea name="aat_resumo"></textarea></label>
+
+        <p class="muted">Registre cada requisição/nota/saída abaixo (adição dinâmica).</p>
+        <div id="aatTableContainer"></div>
+        <div style="margin-top:8px">
+          <button type="button" id="aatAddRow" class="btn-small">Adicionar linha AAT</button>
+        </div>
+        <label>Resumo final (Saldo final, frascos/doses)<textarea name="aat_resumo"></textarea></label>
       </section>
 
-      <!-- Tb Bovina -->
+      <!-- TB BOVINA -->
       <section class="card">
-        <h2>Tuberculina Bovina</h2>
+        <h2>RELATÓRIO DE TUBERCULINA BOVINA – Tb.BOV</h2>
         <div class="grid-2">
           <label>Saldo anterior<input name="tb_bov_saldo_anterior" /></label>
-          <label>Recebidos - NF<input name="tb_bov_recebidos_nf" /></label>
+          <label>Recebidos NF<input name="tb_bov_recebidos_nf" /></label>
         </div>
-        <label>Resumo<textarea name="tb_bov_resumo"></textarea></label>
+        <div id="tbBovTableContainer"></div>
+        <div style="margin-top:8px">
+          <button type="button" id="tbBovAddRow" class="btn-small">Adicionar linha Tb.BOV</button>
+        </div>
+        <label>Resumo final<textarea name="tb_bov_resumo"></textarea></label>
       </section>
 
-      <!-- Tb Aviária -->
+      <!-- TB AVIÁRIA -->
       <section class="card">
-        <h2>Tuberculina Aviária</h2>
+        <h2>RELATÓRIO DE TUBERCULINA AVIÁRIA – Tb.AV</h2>
         <div class="grid-2">
           <label>Saldo anterior<input name="tb_av_saldo_anterior" /></label>
-          <label>Recebidos - NF<input name="tb_av_recebidos_nf" /></label>
+          <label>Recebidos NF<input name="tb_av_recebidos_nf" /></label>
         </div>
-        <label>Resumo<textarea name="tb_av_resumo"></textarea></label>
+        <div id="tbAvTableContainer"></div>
+        <div style="margin-top:8px">
+          <button type="button" id="tbAvAddRow" class="btn-small">Adicionar linha Tb.AV</button>
+        </div>
+        <label>Resumo final<textarea name="tb_av_resumo"></textarea></label>
       </section>
 
-      <!-- B19 -->
+      <!-- VACINA BRUCELOSE B19 -->
       <section class="card">
-        <h2>Vacina Brucelose B19</h2>
-        <label>Registro de compras/vendas/estoque<textarea name="b19_detalhes"></textarea></label>
+        <h2>VACINA BRUCELOSE B19</h2>
+        <p class="muted">Registre compras, vendas e estoque (cada linha é um evento).</p>
+        <div id="b19TableContainer"></div>
+        <div style="margin-top:8px">
+          <button type="button" id="b19AddRow" class="btn-small">Adicionar linha B19</button>
+        </div>
+        <label>Saldo final (frascos/doses)<input name="b19_saldo_final" /></label>
       </section>
 
-      <!-- RB51 -->
+      <!-- VACINA RB51 -->
       <section class="card">
-        <h2>Vacina Brucelose RB51</h2>
-        <label>Registro de compras/vendas/estoque<textarea name="rb51_detalhes"></textarea></label>
+        <h2>VACINA BRUCELOSE RB51</h2>
+        <div id="rb51TableContainer"></div>
+        <div style="margin-top:8px">
+          <button type="button" id="rb51AddRow" class="btn-small">Adicionar linha RB51</button>
+        </div>
+        <label>Saldo final (frascos/doses)<input name="rb51_saldo_final" /></label>
       </section>
 
-      <!-- Antirrábica -->
+      <!-- VACINA ANTIRRÁBICA -->
       <section class="card">
-        <h2>Vacina Antirrábica</h2>
-        <label>Detalhes de vendas/estoque<textarea name="antirrabica_detalhes"></textarea></label>
+        <h2>VACINA ANTIRRÁBICA</h2>
+        <p class="muted">Registre venda por data/produtor/município (25 e 50 doses)</p>
+        <div id="antirrabicaTableContainer"></div>
+        <div style="margin-top:8px">
+          <button type="button" id="antirrabicaAddRow" class="btn-small">Adicionar linha Antirrábica</button>
+        </div>
+        <div class="grid-2" style="margin-top:8px">
+          <label>Estoque Atual (25 doses)<input name="antirrabica_estoque_25" /></label>
+          <label>Estoque Atual (50 doses)<input name="antirrabica_estoque_50" /></label>
+        </div>
       </section>
 
-      <!-- Pasta Vampiricida -->
+      <!-- PASTA VAMPIRICIDA -->
       <section class="card">
-        <h2>Pasta Vampiricida</h2>
-        <label>Detalhes de vendas/estoque<textarea name="pasta_detalhes"></textarea></label>
+        <h2>PASTA VAMPIRICIDA</h2>
+        <div id="pastaTableContainer"></div>
+        <div style="margin-top:8px">
+          <button type="button" id="pastaAddRow" class="btn-small">Adicionar linha Pasta</button>
+        </div>
+        <label>Estoque Atual (tubos)<input name="pasta_estoque_atual" /></label>
+      </section>
+
+      <!-- Assinaturas / Responsável -->
+      <section class="card">
+        <h2>RESPONSÁVEIS</h2>
+        <div class="grid-2">
+          <label>Nome do Responsável Técnico (CRMV) <input name="nome_responsavel_crmv" /></label>
+          <label>CRMV/PR <input name="crmv_pr" /></label>
+        </div>
+        <label>Assinatura do Responsável (pode ser imagem enviada posteriormente)<input name="assinatura_responsavel" placeholder="Nome para assinatura (digitada)" /></label>
       </section>
 
       <section class="card actions">
@@ -109,6 +155,6 @@
     </form>
   </main>
 
-  <script src="script.js"></script>
+  <script src="script-expanded.js"></script>
 </body>
 </html>
