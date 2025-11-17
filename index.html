@@ -20,53 +20,6 @@
   </style>
 </head>
 <body>
-  <script>
-document.getElementById('relatorio-mensal').onsubmit = async function(e) {
-  e.preventDefault();
-
-  // Monta o objeto data com todos os campos do formulário
-  const data = {};
-  Array.from(this.elements).forEach(el => {
-    if (el.name) data[el.name] = el.value;
-  });
-
-  // Envio via fetch POST ao Apps Script Web App
-  const resposta = await fetch('https://script.google.com/macros/s/AKfycbxU4wnys87zx0X3rX55hN_pmo5oc1LGr6plz1O9vi27vmiykn4eI6Ruj6alXsTWJi9k2g/exec', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data),
-    redirect: "follow"
-  });
-
-  document.getElementById('relatorio-mensal').onsubmit = async function(e) {
-  e.preventDefault();
-
-  // Monta o objeto data com todos os campos do formulário
-  const data = {};
-  Array.from(this.elements).forEach(el => {
-    if (el.name) data[el.name] = el.value;
-  });
-
-  // Substitua pela URL do seu Apps Script Web App
-  const resposta = await fetch('https://script.google.com/macros/s/SEU_CODIGO_DE_IMPLANTACAO/exec', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  });
-
-  if (resposta.ok) {
-    alert('Relatório enviado com sucesso!');
-    this.reset();
-  } else {
-    alert('Erro ao enviar o relatório. Tente novamente.');
-  }
-};
-
-</script>
   <div class="header">
     <img src="Parana.jpg" alt="Logo Paraná Governo do Estado">
     <img src="adapar-sem-fundo-300dpi.jpg" alt="Logo ADAPAR">
@@ -106,21 +59,7 @@ document.getElementById('relatorio-mensal').onsubmit = async function(e) {
           </thead>
           <tbody>
             <!-- 31 dias -->
-            <script>
-            for(let i=1;i<=31;i++){
-              document.write('<tr>');
-              document.write('<td>'+i+'</td>');
-              document.write('<td><input name="temp_hora_'+i+'" type="text"></td>');
-              document.write('<td><input name="temp_max_'+i+'" type="text"></td>');
-              document.write('<td><input name="temp_min_'+i+'" type="text"></td>');
-              document.write('<td><input name="temp_atual_'+i+'" type="text"></td>');
-              document.write('<td><input name="temp_resp_'+i+'" type="text"></td>');
-              document.write('<td><input name="temp_visto_'+i+'" type="text"></td>');
-              document.write('<td><input name="temp_obs_'+i+'" type="text"></td>');
-              document.write('</tr>');
-            }
-            </script>
-          </tbody>
+        </tbody>
         </table>
       </section>
       
@@ -275,11 +214,6 @@ document.getElementById('relatorio-mensal').onsubmit = async function(e) {
       <button type="submit" style="font-size:18px;padding: 12px 44px;">Enviar Relatório</button>
     </form>
   </div>
-  <script>
-    document.getElementById('relatorio-mensal').onsubmit = function(e){
-      e.preventDefault();
-      alert('Relatório enviado com sucesso! (Integração posterior)');
-    };
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
