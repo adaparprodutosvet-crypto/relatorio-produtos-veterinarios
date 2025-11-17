@@ -2,21 +2,21 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Relatório Mensal de Comércio de Produtos Veterinários</title>
+  <title>Relatório Mensal - Produtos Veterinários</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; background: #f4f6f8; }
-    .header { display: flex; justify-content: space-between; align-items: center; background: #fff; padding: 20px 40px 10px 40px; border-bottom: 4px solid #1464b3; }
-    .header img { max-height: 70px; }
-    .relatorio { background: #fff; margin: 30px auto; max-width: 1100px; border-radius: 14px; box-shadow: 0 4px 20px #e0e0e0; padding: 40px; }
-    h1 { font-size: 2.3em; font-weight: 700; color: #1464b3; margin-bottom: 8px;}
-    h2, h3 { margin-top: 32px; margin-bottom: 16px; color: #314165;}
-    table { width: 100%; border-collapse: collapse; margin-bottom: 32px; }
-    th, td { border: 1px solid #c2c2c2; padding: 7px 10px; font-size:1em; }
-    th { background: #e5e8ea; }
-    /* Outros ajustes para inputs, labels, etc */
-    label { display: block; margin: 8px 0 4px; font-weight: bold; }
-    input, select, textarea { border-radius: 5px; border: 1px solid #bbb; padding: 6px; margin-bottom: 15px; width: 100%; font-size: 1em;}
-    section { margin-bottom: 35px; }
+    body { font-family: Arial, sans-serif; background: #f8f8f8; margin: 0; }
+    .header { display: flex; justify-content: space-between; align-items: center; background: #fff; padding: 18px 44px; border-bottom: 5px solid #2464a3;}
+    .header img { max-height: 72px; }
+    .container { max-width: 1200px; margin: 34px auto 34px auto; background: #fff; border-radius: 12px; padding: 36px 50px; box-shadow: 0 6px 36px #e4e8ee; }
+    h1 { font-size: 2em; text-align: center; font-weight: 700; color: #16528e; margin-bottom: 10px; }
+    h2, h3 { color: #2e4466; margin-top: 36px; }
+    label { display: block; font-weight: bold; margin-top: 8px; }
+    input, select, textarea { width: 100%; font-size: 1em; margin: 4px 0 13px 0; padding: 6px; border: 1px solid #b0b0b0; border-radius: 5px; background: #f6faff; }
+    table { width: 100%; border-collapse: collapse; margin-bottom: 20px;}
+    th, td { border: 1px solid #bdbdbd; padding: 5px 8px; text-align: center; font-size: 0.98em;}
+    th { background-color: #cee8fa; }
+    .assinatura, .observacao { background: #ededed; border-radius: 7px; padding: 10px 14px;}
+    section { margin-bottom: 36px;}
   </style>
 </head>
 <body>
@@ -24,9 +24,10 @@
     <img src="Parana.jpg" alt="Logo Paraná Governo do Estado">
     <img src="adapar-sem-fundo-300dpi.jpg" alt="Logo ADAPAR">
   </div>
-  <div class="relatorio">
+  <div class="container">
     <h1>RELATÓRIO MENSAL DE COMÉRCIO DE PRODUTOS VETERINÁRIOS DE INTERESSE DA DEFESA AGROPECUÁRIA E CONTROLE DE TEMPERATURA</h1>
     <form id="relatorio-mensal">
+      
       <section>
         <h2>Identificação do Estabelecimento</h2>
         <label>Nome do Estabelecimento:</label><input name="nome_estabelecimento" required>
@@ -37,15 +38,201 @@
         <label>Município:</label><input name="municipio" required>
         <label>UF:</label>
         <select name="uf" required>
-          <option></option>
-          <option>PR</option>
-          <!-- outros estados -->
+          <option></option><option>PR</option>
         </select>
         <label>Registro na ADAPAR:</label><input name="registro_adapar" required>
         <label>Autorizada à Comercialização de:</label><input name="autorizada_comercializacao">
+        <label>Nome do Veterinário Responsável:</label><input name="veterinario_responsavel" required>
+        <label>CRMV:</label><input name="crmv" required>
+        <label>Proprietário do Estabelecimento:</label><input name="proprietario" required>
       </section>
-      <!-- ...demais seções conforme DOCX... -->
+      
+      <section>
+        <h2>Controle de Temperatura</h2>
+        <label>Identificação do Refrigerador:</label><input name="id_refrigerador">
+        <table>
+          <thead>
+            <tr>
+              <th>Dia</th><th>Hora</th><th>Temperatura Máx.</th><th>Temperatura Mín.</th><th>Temperatura Atual</th>
+              <th>Responsável</th><th>Visto</th><th>Observação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- 31 dias -->
+            <script>
+            for(let i=1;i<=31;i++){
+              document.write('<tr>');
+              document.write('<td>'+i+'</td>');
+              document.write('<td><input name="temp_hora_'+i+'" type="text"></td>');
+              document.write('<td><input name="temp_max_'+i+'" type="text"></td>');
+              document.write('<td><input name="temp_min_'+i+'" type="text"></td>');
+              document.write('<td><input name="temp_atual_'+i+'" type="text"></td>');
+              document.write('<td><input name="temp_resp_'+i+'" type="text"></td>');
+              document.write('<td><input name="temp_visto_'+i+'" type="text"></td>');
+              document.write('<td><input name="temp_obs_'+i+'" type="text"></td>');
+              document.write('</tr>');
+            }
+            </script>
+          </tbody>
+        </table>
+      </section>
+      
+      <section>
+        <h2>Relatórios de Produtos Biológicos</h2>
+        <h3>Resumo Quantitativo</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Produto</th><th>Saldo anterior</th><th>Recebido</th><th>Comercializado</th><th>Saldo final</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Antígeno Acidificado Tamponado AAT</td>
+              <td><input name="bio_saldo_ant_a" type="number"></td>
+              <td><input name="bio_recebido_a" type="number"></td>
+              <td><input name="bio_vendido_a" type="number"></td>
+              <td><input name="bio_saldo_final_a" type="number"></td>
+            </tr>
+            <tr><td>Tuberculina Bovina</td>
+              <td><input name="bio_saldo_ant_b" type="number"></td>
+              <td><input name="bio_recebido_b" type="number"></td>
+              <td><input name="bio_vendido_b" type="number"></td>
+              <td><input name="bio_saldo_final_b" type="number"></td>
+            </tr>
+            <tr><td>Tuberculina Aviria</td>
+              <td><input name="bio_saldo_ant_c" type="number"></td>
+              <td><input name="bio_recebido_c" type="number"></td>
+              <td><input name="bio_vendido_c" type="number"></td>
+              <td><input name="bio_saldo_final_c" type="number"></td>
+            </tr>
+            <tr><td>Vacina Brucelose B19</td>
+              <td><input name="bio_saldo_ant_d" type="number"></td>
+              <td><input name="bio_recebido_d" type="number"></td>
+              <td><input name="bio_vendido_d" type="number"></td>
+              <td><input name="bio_saldo_final_d" type="number"></td>
+            </tr>
+            <tr><td>Vacina Brucelose RB51</td>
+              <td><input name="bio_saldo_ant_e" type="number"></td>
+              <td><input name="bio_recebido_e" type="number"></td>
+              <td><input name="bio_vendido_e" type="number"></td>
+              <td><input name="bio_saldo_final_e" type="number"></td>
+            </tr>
+            <tr><td>Vacina Raiva Herbívoros</td>
+              <td><input name="bio_saldo_ant_f" type="number"></td>
+              <td><input name="bio_recebido_f" type="number"></td>
+              <td><input name="bio_vendido_f" type="number"></td>
+              <td><input name="bio_saldo_final_f" type="number"></td>
+            </tr>
+            <tr><td>Vacinas Avícolas</td>
+              <td><input name="bio_saldo_ant_g" type="number"></td>
+              <td><input name="bio_recebido_g" type="number"></td>
+              <td><input name="bio_vendido_g" type="number"></td>
+              <td><input name="bio_saldo_final_g" type="number"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="assinatura">
+          <label>Nome do Responsável Técnico:</label><input name="rt_nome">
+          <label>CRMV:</label><input name="rt_crmv">
+        </div>
+      </section>
+      
+      <section>
+        <h2>Relatórios de Produtos Farmacêuticos e Outros</h2>
+        <h3>Produtos Farmacêuticos Não Controlados</h3>
+        <label>Pasta Vampiricida:</label><input name="farmaco_vampiricida" type="number">
+        <h3>Antimicrobianos:</h3>
+        <input name="farmaco_antimicrobianos" type="number">
+        <h3>Produtos Farmacêuticos Controlados:</h3>
+        <input name="farmaco_controlados" type="number">
+        <h3>Outros Farmacêuticos:</h3>
+        <input name="farmaco_outros" type="text">
+      </section>
+      
+      <section>
+        <h2>Relatório Comercialização Vacinas/Pasta</h2>
+        <h3>Vacina Contra Raiva</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Data da Venda</th><th>Nome do Produto</th><th>Município</th><th>Localidade</th><th>Telefone</th>
+              <th>Laboratório</th><th>Partida</th><th>Validade</th>
+              <th>25 doses</th><th>50 doses</th>
+              <th>Espécie Animal</th><th>Quantidade de animais vacinados</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input name="raiva_data_venda"></td>
+              <td><input name="raiva_nome_produto"></td>
+              <td><input name="raiva_municipio"></td>
+              <td><input name="raiva_localidade"></td>
+              <td><input name="raiva_telefone"></td>
+              <td><input name="raiva_laboratorio"></td>
+              <td><input name="raiva_partida"></td>
+              <td><input name="raiva_validade"></td>
+              <td><input name="raiva_25_doses"></td>
+              <td><input name="raiva_50_doses"></td>
+              <td><input name="raiva_especie_animal"></td>
+              <td><input name="raiva_qtd_animais"></td>
+            </tr>
+            <!-- Adicione mais linhas se necessário -->
+          </tbody>
+        </table>
+        <h3>Pasta Vampiricida</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Data da Venda</th><th>Município</th><th>Localidade</th><th>Telefone</th>
+              <th>Laboratório</th><th>Partida</th><th>Validade</th>
+              <th>Nº Tubos Vendidos</th>
+              <th>Espécie Animal</th>
+              <th>Quantidade de animais tratados</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input name="pasta_data_venda"></td>
+              <td><input name="pasta_municipio"></td>
+              <td><input name="pasta_localidade"></td>
+              <td><input name="pasta_telefone"></td>
+              <td><input name="pasta_laboratorio"></td>
+              <td><input name="pasta_partida"></td>
+              <td><input name="pasta_validade"></td>
+              <td><input name="pasta_tubos_vendidos"></td>
+              <td><input name="pasta_especie_animal"></td>
+              <td><input name="pasta_qtd_animais"></td>
+            </tr>
+            <!-- Adicione mais linhas -->
+          </tbody>
+        </table>
+      </section>
+      
+      <section>
+        <h2>Observações Finais e Justificativas</h2>
+        <textarea name="observacoes_finais" rows="4" placeholder="Digite aqui quaisquer justificativas, esclarecimentos ou observações relevantes ao relatório."></textarea>
+        <div class="assinatura">
+          <label>Nome do Responsável Técnico:</label><input name="assinatura_nome">
+          <label>CRMV:</label><input name="assinatura_crmv">
+        </div>
+      </section>
+
+      <section>
+        <h2>Informações para Envio</h2>
+        <label>E-mail do responsável pelo preenchimento:</label>
+        <input name="email_responsavel" type="email" required>
+        <label>E-mail do escritório ADAPAR:</label>
+        <input name="email_adapar" type="email" required>
+      </section>
+      
+      <button type="submit" style="font-size:18px;padding: 12px 44px;">Enviar Relatório</button>
     </form>
   </div>
+  <script>
+    document.getElementById('relatorio-mensal').onsubmit = function(e){
+      e.preventDefault();
+      alert('Relatório enviado com sucesso! (Integração posterior)');
+    };
+  </script>
 </body>
 </html>
