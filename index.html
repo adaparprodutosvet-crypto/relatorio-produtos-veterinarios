@@ -40,6 +40,24 @@ document.getElementById('relatorio-mensal').onsubmit = async function(e) {
     redirect: "follow"
   });
 
+  document.getElementById('relatorio-mensal').onsubmit = async function(e) {
+  e.preventDefault();
+
+  // Monta o objeto data com todos os campos do formulário
+  const data = {};
+  Array.from(this.elements).forEach(el => {
+    if (el.name) data[el.name] = el.value;
+  });
+
+  // Substitua pela URL do seu Apps Script Web App
+  const resposta = await fetch('https://script.google.com/macros/s/SEU_CODIGO_DE_IMPLANTACAO/exec', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  });
+
   if (resposta.ok) {
     alert('Relatório enviado com sucesso!');
     this.reset();
@@ -47,6 +65,7 @@ document.getElementById('relatorio-mensal').onsubmit = async function(e) {
     alert('Erro ao enviar o relatório. Tente novamente.');
   }
 };
+
 </script>
   <div class="header">
     <img src="Parana.jpg" alt="Logo Paraná Governo do Estado">
